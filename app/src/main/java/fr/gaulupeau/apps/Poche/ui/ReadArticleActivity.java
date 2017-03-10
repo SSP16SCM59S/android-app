@@ -369,7 +369,11 @@ public class ReadArticleActivity extends BaseActionBarActivity {
         if(updateContent) {
             Log.d(TAG, "onArticleChangedEvent() content changed");
 
-            // TODO: reload WebView content
+//            prepareToRestorePosition(true);
+
+            loadArticleToWebView();
+
+//            restorePositionAfterUpdate();
         }
     }
 
