@@ -30,10 +30,13 @@ public class FeedsChangedEvent {
     }
 
     public void invalidateAll(ChangeType changeType) {
-        addChanges(EnumSet.of(changeType));
+        invalidateAll(EnumSet.of(changeType));
     }
 
     public void invalidateAll(EnumSet<ChangeType> changes) {
+        if(changes == null) changes = EnumSet.of(ChangeType.UNSPECIFIED);
+
+        invalidateAllChanges.addAll(changes);
         addChanges(changes);
     }
 
