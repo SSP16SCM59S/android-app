@@ -333,16 +333,21 @@ public class ReadArticleActivity extends BaseActionBarActivity {
 
         Log.d(TAG, "onArticlesChangedEvent() changes: " + changes);
 
-        boolean updateActions = !Collections.disjoint(changes, CHANGE_SET_ACTIONS);
-        boolean updateContent = !Collections.disjoint(changes, CHANGE_SET_CONTENT);
-        boolean updateTitle = changes.contains(FeedsChangedEvent.ChangeType.TITLE_CHANGED);
-        boolean updateURL = changes.contains(FeedsChangedEvent.ChangeType.URL_CHANGED);
+        boolean updateActions;
+        boolean updateContent;
+        boolean updateTitle;
+        boolean updateURL;
 
         if(changes.contains(FeedsChangedEvent.ChangeType.UNSPECIFIED)) {
             updateActions = true;
-            updateTitle = true;
             updateContent = true;
+            updateTitle = true;
             updateURL = true;
+        } else {
+            updateActions = !Collections.disjoint(changes, CHANGE_SET_ACTIONS);
+            updateContent = !Collections.disjoint(changes, CHANGE_SET_CONTENT);
+            updateTitle = changes.contains(FeedsChangedEvent.ChangeType.TITLE_CHANGED);
+            updateURL = changes.contains(FeedsChangedEvent.ChangeType.URL_CHANGED);
         }
 
         if(updateActions) {
