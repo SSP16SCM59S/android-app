@@ -26,6 +26,7 @@ public class ArticleListsFragment extends Fragment implements Sortable, Searchab
     private static final String STATE_SEARCH_QUERY = "search_query";
 
     private static final EnumSet<ArticlesChangedEvent.ChangeType> CHANGE_SET = EnumSet.of(
+            ArticlesChangedEvent.ChangeType.UNSPECIFIED,
             ArticlesChangedEvent.ChangeType.ADDED,
             ArticlesChangedEvent.ChangeType.DELETED,
             ArticlesChangedEvent.ChangeType.FAVORITED,
@@ -160,7 +161,7 @@ public class ArticleListsFragment extends Fragment implements Sortable, Searchab
     }
 
     private void invalidateLists(FeedsChangedEvent event) {
-        if(event.isInvalidateAll()) {
+        if(!Collections.disjoint(event.getInvalidateAllChanges(), CHANGE_SET)) {
             updateAllLists();
             return;
         }

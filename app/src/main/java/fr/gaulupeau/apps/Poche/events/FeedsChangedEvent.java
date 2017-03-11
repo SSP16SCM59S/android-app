@@ -40,6 +40,10 @@ public class FeedsChangedEvent {
         addChanges(changes);
     }
 
+    public EnumSet<ChangeType> getInvalidateAllChanges() {
+        return invalidateAllChanges;
+    }
+
     public boolean isMainFeedChanged() {
         return !mainFeedChanges.isEmpty();
     }
